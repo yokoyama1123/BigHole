@@ -19,7 +19,7 @@ public class HoleTrigger : MonoBehaviour
     [SerializeField] private string message = "‰½‚H";
 
     [Header("“ü—Í—“‚Ì•\¦")]
-    [SerializeField] private TextMeshProUGUI textMeshPro;
+    [SerializeField] private GameObject textMeshPro;
 
     private AudioSource audioSource;
     private bool hasTriggered = false;
@@ -87,7 +87,7 @@ public class HoleTrigger : MonoBehaviour
 
     private void SetText()
     {
-        textMeshPro.enabled = true;
+        textMeshPro.SetActive(true);
 
         if (messageText != null)
         {

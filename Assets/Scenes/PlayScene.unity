@@ -457,7 +457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &475841692
 RectTransform:
   m_ObjectHideFlags: 0
@@ -510,7 +510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New
+  m_text: "\u5165\u529B\u4E2D:"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f3bea4629f16b484baf0558d3c9ce5bd, type: 2}
   m_sharedMaterial: {fileID: 7506251658726338614, guid: f3bea4629f16b484baf0558d3c9ce5bd, type: 2}
@@ -626,7 +626,7 @@ MonoBehaviour:
   maxDelay: 3
   messageText: {fileID: 464322603}
   message: "\u4F55\u79D2\uFF1F(s)"
-  textMeshPro: {fileID: 475841694}
+  textMeshPro: {fileID: 475841691}
 --- !u!212 &901225060
 SpriteRenderer:
   serializedVersion: 2

@@ -9,14 +9,17 @@ public class OnClickUI : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI messageText;
 
+    private bool EndChange = false;
+
     void Update()
     {
         // Input Systemでの左クリック検出（シンプル版）
         Mouse mouse = Mouse.current;
         if (mouse != null && mouse.leftButton.wasPressedThisFrame)
         {
-            if (messageText != null)
+            if (messageText != null && !EndChange)
             {
+                EndChange = true;
                 messageText.text = message;
             }
             Debug.Log(message);
