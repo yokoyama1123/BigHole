@@ -1,10 +1,13 @@
 using TMPro;
+using Unity.VectorGraphics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class NumberInput : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI displayText;
+    [SerializeField] private SaveData savedata;
     private string currentInput = "";
     private int confirmedNumber = 0; // int型で保存
 
@@ -104,6 +107,10 @@ public class NumberInput : MonoBehaviour
         // GameManager.Instance.SetPlayerNumber(number);
         // またはイベントを発行
         // EventSystem.TriggerNumberConfirmed(number);
+
+        savedata.InputSecond = number;
+
+        FadeManager.Instance.LoadScene("PlayScene2", 1.0f);
     }
 
     // 入力をリセット

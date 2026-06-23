@@ -21,6 +21,9 @@ public class HoleTrigger : MonoBehaviour
     [Header("“ü—Í—“‚Ì•\¦")]
     [SerializeField] private GameObject textMeshPro;
 
+    [Header("ƒ‰ƒ“ƒ_ƒ€•b”‚Ì‹L˜^")]
+    [SerializeField] private SaveData savedata;
+
     private AudioSource audioSource;
     private bool hasTriggered = false;
     private Coroutine currentCoroutine = null;
@@ -65,6 +68,10 @@ public class HoleTrigger : MonoBehaviour
         {
             audioSource.PlayOneShot(soundClip);
             Debug.Log($"’x‰„ {delay} •bŒã‚É‰¹‚ğÄ¶‚µ‚Ü‚µ‚½");
+
+            //•b”‚ğ‹L˜^
+            savedata.SetSecond = delay;
+
             SetText();
         }
         else
