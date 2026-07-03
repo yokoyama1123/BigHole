@@ -10,6 +10,7 @@ public class NumberInput : MonoBehaviour
     [SerializeField] private SaveData savedata;
     private string currentInput = "";
     private int confirmedNumber = 0; // int型で保存
+    private bool isConfirmed = false; // 確定フラグ
 
     void OnEnable()
     {
@@ -31,6 +32,9 @@ public class NumberInput : MonoBehaviour
     {
         if (Keyboard.current == null) return;
 
+        // 確定済みの場合は入力を無視
+        if (isConfirmed) return;
+
         // Enterキーが押されたら確定
         if (Keyboard.current.enterKey.wasPressedThisFrame ||
             Keyboard.current.numpadEnterKey.wasPressedThisFrame)
@@ -47,6 +51,9 @@ public class NumberInput : MonoBehaviour
 
     void OnTextInput(char c)
     {
+        // 確定済みの場合は入力を無視
+        if (isConfirmed) return;
+
         if (char.IsDigit(c))
         {
             currentInput += c;
@@ -62,12 +69,15 @@ public class NumberInput : MonoBehaviour
 
     void ConfirmInput()
     {
+        if (isConfirmed) return; // 二重確定防止
+
         if (!string.IsNullOrEmpty(currentInput))
         {
             // int型に変換して保存
             if (int.TryParse(currentInput, out int number))
             {
                 confirmedNumber = number;
+                isConfirmed = true; // 確定フラグを立てる
                 displayText.text = "確定: " + confirmedNumber;
                 Debug.Log($"確定した数値: {confirmedNumber} (int型)");
 
@@ -89,6 +99,8 @@ public class NumberInput : MonoBehaviour
 
     void CancelInput()
     {
+        if (isConfirmed) return; // 確定済みならキャンセル不可
+
         currentInput = "";
         displayText.text = "キャンセルしました";
         Debug.Log("入力キャンセル");
@@ -100,24 +112,25 @@ public class NumberInput : MonoBehaviour
         return confirmedNumber;
     }
 
+    // 確定状態を取得
+    public bool IsConfirmed()
+    {
+        return isConfirmed;
+    }
+
     // 確定時に呼び出されるコールバック（任意の処理を追加可能）
     void OnNumberConfirmed(int number)
     {
-        // 例：数値をゲーム内の別のシステムに渡す
-        // GameManager.Instance.SetPlayerNumber(number);
-        // またはイベントを発行
-        // EventSystem.TriggerNumberConfirmed(number);
-
         savedata.InputSecond = number;
-
         FadeManager.Instance.LoadScene("PlayScene2", 1.0f);
     }
 
-    // 入力をリセット
+    // 入力をリセット（必要に応じて）
     public void ResetInput()
     {
         currentInput = "";
         confirmedNumber = 0;
+        isConfirmed = false;
         displayText.text = "";
     }
 }

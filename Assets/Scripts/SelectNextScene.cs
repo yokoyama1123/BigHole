@@ -34,7 +34,7 @@ public class SelectNextScene : MonoBehaviour
     IEnumerator DelayedGoScene()
     {
         // 1秒待機
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(1.5f);
 
         // シーン遷移を実行
         int difference = m_setSecond - m_inputSecond;
